@@ -5,7 +5,7 @@ import io
 
 st.set_page_config(page_title="Duelist Processor", layout="wide")
 
-st.title("Duelist Data Processing Tool")
+st.title("🏦 Duelist Data Processing Tool")
 
 st.markdown("Upload the required files to generate the **Updated Duelist Report**.")
 
