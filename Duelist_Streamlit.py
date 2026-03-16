@@ -78,7 +78,7 @@ if process:
         # INSURANCE LOGIC
         # ==========================
 
-        insurance["date"] = pd.to_datetime(insurance["date"])
+        insurance["Date"] = pd.to_datetime(insurance["Date"])
 
         yesterday = pd.Timestamp.today().normalize() - pd.Timedelta(days=1)
 
