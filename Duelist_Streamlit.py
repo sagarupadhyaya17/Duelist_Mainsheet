@@ -83,7 +83,7 @@ if process:
         yesterday = pd.Timestamp.today().normalize() - pd.Timedelta(days=1)
 
         insurance["InsurancePremium"] = np.where(
-            yesterday < insurance["date"],
+            yesterday < insurance["Date"],
             insurance["InsPremium"],
             0
         )

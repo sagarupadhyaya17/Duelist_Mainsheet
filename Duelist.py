@@ -4,8 +4,8 @@ import io
 
 # ==== File Paths ====
 duelist_file = r"Input_Files/duelist_dump_march_11.xlsx"
-duelist_main_file = r"Z:/1.Reports Repository/FY 2082.83/1. Duelist/8.Fagun/Duelist 10th March, 2026.xlsb"
-insurance = r"Z:/1.Reports Repository/FY 2082.83/1. Duelist/8.Fagun/Fagun insurance.xlsx"
+duelist_main_file = r"Z:/1.Reports Repository/FY 2082.83/1. Duelist/9.Chaitra/Duelist 10th March, 2026.xlsb"
+insurance = r"Z:/1.Reports Repository/FY 2082.83/1. Duelist/9.Chaitra/Chaitra Insurance 2082.xlsx"
 output_file = r"Output_Files/updated_duelist_march_11.xlsx"
 
 print("Processing... Please wait ⏳")
@@ -56,7 +56,7 @@ insurance["date"] = pd.to_datetime(insurance["date"])
 yesterday = pd.Timestamp.today().normalize() - pd.Timedelta(days=1)
 
 insurance["InsurancePremium"] = np.where(
-    yesterday < insurance["date"],
+    yesterday < insurance["Date"],
     insurance["InsPremium"],
     0
 )
