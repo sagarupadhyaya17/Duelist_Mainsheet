@@ -277,18 +277,18 @@ if process:
             st.write(f"Unmatched rows: {len(unmatched)}")
             st.dataframe(unmatched, use_container_width=True)
 
-    buffer = io.BytesIO()
+        buffer = io.BytesIO()
 
-    with pd.ExcelWriter(buffer, engine="openpyxl") as writer:
-        final_df.to_excel(writer, index=False, sheet_name="Mainsheet")
+        with pd.ExcelWriter(buffer, engine="openpyxl") as writer:
+            final_df.to_excel(writer, index=False, sheet_name="Mainsheet")
 
-        buffer.seek(0)
+            buffer.seek(0)
 
-    st.download_button(
-        label="📥 Download Updated Duelist File",
-        data=buffer,
-        file_name="updated_duelist.xlsx",
-        mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
-    )
+        st.download_button(
+            label="📥 Download Updated Duelist File",
+            data=buffer,
+            file_name="updated_duelist.xlsx",
+            mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+        )
 
     st.success("✅ Processing Completed")
