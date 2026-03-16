@@ -3,10 +3,10 @@ import numpy as np
 import io
 
 # ==== File Paths ====
-duelist_file = r"Input_Files/duelist_dump_march_11.xlsx"
-duelist_main_file = r"Z:/1.Reports Repository/FY 2082.83/1. Duelist/9.Chaitra/Duelist 10th March, 2026.xlsb"
+duelist_file = r"Input_Files/Duelist_Dump_March_15.xlsx"
+duelist_main_file = r"Z:/1.Reports Repository/FY 2082.83/1. Duelist/9.Chaitra/Duelist 14th March, 2026.xlsx"
 insurance = r"Z:/1.Reports Repository/FY 2082.83/1. Duelist/9.Chaitra/Chaitra Insurance 2082.xlsx"
-output_file = r"Output_Files/updated_duelist_march_11.xlsx"
+output_file = r"Output_Files/updated_duelist_march_15.xlsx"
 
 print("Processing... Please wait ⏳")
 
@@ -82,9 +82,11 @@ print(insurance["MainCode"].duplicated().sum())
 
 insurance[insurance.duplicated("MainCode", keep=False)].head(5)
 
+insurance_sum = insurance.groupby("MainCode")["InsurancePremium"].sum().reset_index()
+
 duelist = duelist.drop_duplicates(subset="MainCode", keep = "last")
 duelist_main = duelist_main.drop_duplicates(subset="MainCode", keep = "last")
-insurance = insurance.drop_duplicates(subset="MainCode", keep = "last")
+insurance_sum = insurance_sum.drop_duplicates(subset="MainCode", keep = "last")
 
 print(duelist['AgeingDays'].dtypes)
 
@@ -141,7 +143,7 @@ df.head(2)
 
 # merge
 df = df.merge(
-    insurance[["MainCode", "InsurancePremium"]],
+    insurance_sum[["MainCode", "InsurancePremium"]],
     on="MainCode",
     how="left",
     suffixes=("", "_ref")
