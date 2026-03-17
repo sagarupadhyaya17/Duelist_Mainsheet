@@ -3,10 +3,10 @@ import numpy as np
 import io
 
 # ==== File Paths ====
-duelist_file = r"Input_Files/Duelist_Dump_March_15.xlsx"
-duelist_main_file = r"Z:/1.Reports Repository/FY 2082.83/1. Duelist/9.Chaitra/Duelist 14th March, 2026.xlsx"
+duelist_file = r"Input_Files/duelist_dump_16_march.xlsx"
+duelist_main_file = r"Z:/1.Reports Repository/FY 2082.83/1. Duelist/9.Chaitra/Duelist 15th March, 2026.xlsx"
 insurance = r"Z:/1.Reports Repository/FY 2082.83/1. Duelist/9.Chaitra/Chaitra Insurance 2082.xlsx"
-output_file = r"Output_Files/updated_duelist_march_15.xlsx"
+output_file = r"Output_Files/updated_duelist_march_16.xlsx"
 
 print("Processing... Please wait ⏳")
 
@@ -251,6 +251,23 @@ for col in cols:
 
 # Drop temporary reference columns
 final_df.drop(columns=[f"{col}_ref" for col in cols], inplace=True)
+
+# Merge only on BranchName for remaining missing values ---
+df_ref_branch = duelist_main[["BranchName"] + cols].drop_duplicates(subset=["BranchName"], keep="last")
+
+final_df = final_df.merge(
+    df_ref_branch,
+    on="BranchName",
+    how="left",
+    suffixes=("", "_branch")
+)
+
+# Fill missing values from BranchName merge
+for col in cols:
+    final_df[col] = final_df[col].fillna(final_df[f"{col}_branch"])
+
+# Drop temporary branch reference columns
+final_df.drop(columns=[f"{col}_branch" for col in cols], inplace=True)
 
 final_df.to_excel(output_file, index=False, sheet_name="Mainsheet")
 

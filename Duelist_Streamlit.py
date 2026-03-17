@@ -263,6 +263,23 @@ if process:
 
         final_df.drop(columns=[f"{col}_ref" for col in cols], inplace=True)
 
+        # Merge only on BranchName for remaining missing values ---
+        df_ref_branch = duelist_main[["BranchName"] + cols].drop_duplicates(subset=["BranchName"], keep="last")
+
+        final_df = final_df.merge(
+            df_ref_branch,
+            on="BranchName",
+            how="left",
+            suffixes=("", "_branch")
+        )
+
+        # Fill missing values from BranchName merge
+        for col in cols:
+            final_df[col] = final_df[col].fillna(final_df[f"{col}_branch"])
+
+        # Drop temporary branch reference columns
+        final_df.drop(columns=[f"{col}_branch" for col in cols], inplace=True)
+
         # =====================================================
         # SHOW DATA
         # =====================================================
