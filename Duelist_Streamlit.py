@@ -242,43 +242,45 @@ if process:
             "Bucket"
         ] = "Above 365 Days"
 
-        cols = ["OfficerName", "Loan Type", "Dealer Name"]
+        final_df = df.copy()
 
-        df_ref = duelist_main[["AcTypeDesc", "BranchName"] + cols].drop_duplicates(
-            subset=["AcTypeDesc", "BranchName"], keep="last"
-        )
+        # cols = ["OfficerName", "Loan Type", "Dealer Name"]
 
-        final_df = df.merge(
-            df_ref,
-            on=["AcTypeDesc", "BranchName"],
-            how="left",
-            suffixes=("", "_ref")
-        )
+        # df_ref = duelist_main[["AcTypeDesc", "BranchName"] + cols].drop_duplicates(
+        #     subset=["AcTypeDesc", "BranchName"], keep="last"
+        # )
 
-        for col in cols:
-            final_df[col] = final_df[col].astype(str).str.strip().replace(
-                r'^(|None|nan|\s+)$', pd.NA, regex=True
-            )
-            final_df[col] = final_df[col].fillna(final_df[f"{col}_ref"])
+        # final_df = df.merge(
+        #     df_ref,
+        #     on=["AcTypeDesc", "BranchName"],
+        #     how="left",
+        #     suffixes=("", "_ref")
+        # )
 
-        final_df.drop(columns=[f"{col}_ref" for col in cols], inplace=True)
+        # for col in cols:
+        #     final_df[col] = final_df[col].astype(str).str.strip().replace(
+        #         r'^(|None|nan|\s+)$', pd.NA, regex=True
+        #     )
+        #     final_df[col] = final_df[col].fillna(final_df[f"{col}_ref"])
 
-        # Merge only on BranchName for remaining missing values ---
-        df_ref_branch = duelist_main[["BranchName"] + cols].drop_duplicates(subset=["BranchName"], keep="last")
+        # final_df.drop(columns=[f"{col}_ref" for col in cols], inplace=True)
 
-        final_df = final_df.merge(
-            df_ref_branch,
-            on="BranchName",
-            how="left",
-            suffixes=("", "_branch")
-        )
+        # # Merge only on BranchName for remaining missing values ---
+        # df_ref_branch = duelist_main[["BranchName"] + cols].drop_duplicates(subset=["BranchName"], keep="last")
 
-        # Fill missing values from BranchName merge
-        for col in cols:
-            final_df[col] = final_df[col].fillna(final_df[f"{col}_branch"])
+        # final_df = final_df.merge(
+        #     df_ref_branch,
+        #     on="BranchName",
+        #     how="left",
+        #     suffixes=("", "_branch")
+        # )
 
-        # Drop temporary branch reference columns
-        final_df.drop(columns=[f"{col}_branch" for col in cols], inplace=True)
+        # # Fill missing values from BranchName merge
+        # for col in cols:
+        #     final_df[col] = final_df[col].fillna(final_df[f"{col}_branch"])
+
+        # # Drop temporary branch reference columns
+        # final_df.drop(columns=[f"{col}_branch" for col in cols], inplace=True)
 
         # =====================================================
         # SHOW DATA
