@@ -39,26 +39,26 @@ if process:
         if duelist_file.name.endswith(".xlsb"):
             duelist = pd.read_excel(
                 duelist_file,
-                dtype={"MainCode": str, "AcCodeForChg": str, "Nominee": str},
+                dtype={"ClientCode": str, "MainCode": str, "AcCodeForChg": str, "Nominee": str},
                 engine="pyxlsb"
             )
         else:
             duelist = pd.read_excel(
                 duelist_file,
-                dtype={"MainCode": str, "AcCodeForChg": str, "Nominee": str},
+                dtype={"ClientCode": str, "MainCode": str, "AcCodeForChg": str, "Nominee": str},
                 engine="openpyxl"
             )
 
         if duelist_main_file.name.endswith(".xlsb"):
             duelist_main = pd.read_excel(
                 duelist_main_file,
-                dtype={"MainCode": str, "AcCodeForChg": str, "Nominee": str},
+                dtype={"ClientCode": str, "MainCode": str, "AcCodeForChg": str, "Nominee": str},
                 engine="pyxlsb"
             )
         else:
             duelist_main = pd.read_excel(
                 duelist_main_file,
-                dtype={"MainCode": str, "AcCodeForChg": str, "Nominee": str},
+                dtype={"ClientCode": str, "MainCode": str, "AcCodeForChg": str, "Nominee": str},
                 engine="openpyxl"
             )
 

@@ -15,26 +15,26 @@ insurance = pd.read_excel(insurance, dtype={"MainCode": str})
 if duelist_file.endswith(".xlsb"):
     duelist = pd.read_excel(
         duelist_file,
-        dtype={"MainCode": str, "AcCodeForChg": str, "Nominee": str},
+        dtype={"ClientCode": str, "MainCode": str, "AcCodeForChg": str, "Nominee": str},
         engine="pyxlsb"
 )
 else:
     duelist = pd.read_excel(
         duelist_file,
-        dtype={"MainCode": str, "AcCodeForChg": str, "Nominee": str},
+        dtype={"ClientCode": str, "MainCode": str, "AcCodeForChg": str, "Nominee": str},
         engine="openpyxl"
     )  
 
 if duelist_main_file.endswith(".xlsb"):
     duelist_main = pd.read_excel(
         duelist_main_file,
-        dtype={"MainCode": str, "AcCodeForChg": str, "Nominee": str},
+        dtype={"ClientCode": str, "MainCode": str, "AcCodeForChg": str, "Nominee": str},
         engine="pyxlsb"
     )
 else:
     duelist_main = pd.read_excel(
         duelist_main_file,
-        dtype={"MainCode": str, "AcCodeForChg": str, "Nominee": str},
+        dtype={"ClientCode": str, "MainCode": str, "AcCodeForChg": str, "Nominee": str},
         engine="openpyxl"
     )
 
