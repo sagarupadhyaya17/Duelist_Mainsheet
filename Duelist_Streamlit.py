@@ -186,9 +186,9 @@ if process:
         choices1 = [
             "Regular",
             "1-30 Days",
-            "31-60 Days",
+            "31-60Days",
             "61-90 Days",
-            "91-120 Days",
+            "91-120Days",
             "121-180 Days",
             "181-365 Days",
             "Above 365 Days"
@@ -207,7 +207,7 @@ if process:
         choices2 = [
             "Regular",
             "1-90 Days",
-            "91-180 Days",
+            "91-180Days",
             "181-365 Days",
             "Above 365 Days"
         ]
