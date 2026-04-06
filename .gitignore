@@ -1,2 +1,11 @@
 /Input_Files
 /Output_Files
+
+*.xlsx
+*.xls
+*.xlsm
+*.xlsb
+*.csv
+*.doc
+*.docs
+*.docx
