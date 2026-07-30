@@ -18,7 +18,7 @@ with col2:
     duelist_main_file = st.file_uploader("Upload Duelist Main File", type=["xlsx","xlsb"])
 
 with col3:
-    insurance_file = st.file_uploader("Upload Insurance File", type=["xlsx"])
+    insurance_file = st.file_uploader("Upload Insurance File", type=["xlsx","xlsb"])
 
 process = st.button("🚀 Process Files")
 
@@ -34,7 +34,20 @@ if process:
         # READ FILES
         # ==========================
 
-        insurance = pd.read_excel(insurance_file, dtype={"MainCode": str})
+        if insurance_file.name.endswith(".xlsb"):
+            insurance = pd.read_excel(
+                insurance_file,
+                dtype={"MainCode": str},
+                engine="pyxlsb"
+            )
+        else:
+            insurance = pd.read_excel(
+                insurance_file,
+                dtype={"MainCode": str},
+                engine="openpyxl"
+            )
+
+        # insurance = pd.read_excel(insurance_file, dtype={"MainCode": str})
 
         if duelist_file.name.endswith(".xlsb"):
             duelist = pd.read_excel(
