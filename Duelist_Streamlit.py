@@ -257,26 +257,26 @@ if process:
 
         final_df = df.copy()
 
-        # cols = ["OfficerName", "Loan Type", "Dealer Name"]
+        cols = ["OfficerName", "Loan Type", "Dealer Name"]
 
-        # df_ref = duelist_main[["AcTypeDesc", "BranchName"] + cols].drop_duplicates(
-        #     subset=["AcTypeDesc", "BranchName"], keep="last"
-        # )
+        df_ref = duelist_main[["AcTypeDesc", "BranchName"] + cols].drop_duplicates(
+            subset=["AcTypeDesc", "BranchName"], keep="last"
+        )
 
-        # final_df = df.merge(
-        #     df_ref,
-        #     on=["AcTypeDesc", "BranchName"],
-        #     how="left",
-        #     suffixes=("", "_ref")
-        # )
+        final_df = df.merge(
+            df_ref,
+            on=["AcTypeDesc", "BranchName"],
+            how="left",
+            suffixes=("", "_ref")
+        )
 
-        # for col in cols:
-        #     final_df[col] = final_df[col].astype(str).str.strip().replace(
-        #         r'^(|None|nan|\s+)$', pd.NA, regex=True
-        #     )
-        #     final_df[col] = final_df[col].fillna(final_df[f"{col}_ref"])
+        for col in cols:
+            final_df[col] = final_df[col].astype(str).str.strip().replace(
+                r'^(|None|nan|\s+)$', pd.NA, regex=True
+            )
+            final_df[col] = final_df[col].fillna(final_df[f"{col}_ref"])
 
-        # final_df.drop(columns=[f"{col}_ref" for col in cols], inplace=True)
+        final_df.drop(columns=[f"{col}_ref" for col in cols], inplace=True)
 
         # # Merge only on BranchName for remaining missing values ---
         # df_ref_branch = duelist_main[["BranchName"] + cols].drop_duplicates(subset=["BranchName"], keep="last")
