@@ -257,6 +257,7 @@ if process:
 
         final_df = df.copy()
 
+        # Merge on the basis of ActypeDesc and BranchName to fill missing values for OfficerName, Loan Type, and Dealer Name
         cols = ["OfficerName", "Loan Type", "Dealer Name"]
 
         df_ref = duelist_main[["AcTypeDesc", "BranchName"] + cols].drop_duplicates(
