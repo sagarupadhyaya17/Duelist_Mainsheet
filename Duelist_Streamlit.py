@@ -101,7 +101,7 @@ if process:
             0
         )
 
-        insurance_sum = insurance.groupby("MainCode")["InsurancePremium"].sum().reset_index()
+        # insurance_sum = insurance.groupby("MainCode")["InsurancePremium"].sum().reset_index()
 
         # ==========================
         # FILTER
@@ -116,7 +116,7 @@ if process:
 
         duelist = duelist.drop_duplicates(subset="MainCode", keep="last")
         duelist_main = duelist_main.drop_duplicates(subset="MainCode", keep="last")
-        insurance_sum = insurance_sum.drop_duplicates(subset="MainCode", keep="last")
+        # insurance_sum = insurance_sum.drop_duplicates(subset="MainCode", keep="last")
 
         # ==========================
         # AGEING DAYS
@@ -169,7 +169,7 @@ if process:
         # ==========================
 
         df = df.merge(
-            insurance_sum[["MainCode", "InsurancePremium"]],
+            insurance[["MainCode", "InsurancePremium"]],
             on="MainCode",
             how="left",
             suffixes=("", "_ref")
