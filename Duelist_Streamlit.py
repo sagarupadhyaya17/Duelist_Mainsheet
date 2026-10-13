@@ -116,6 +116,7 @@ if process:
 
         duelist = duelist.drop_duplicates(subset="MainCode", keep="last")
         duelist_main = duelist_main.drop_duplicates(subset="MainCode", keep="last")
+        insurance = insurance.drop_duplicates(subset="MainCode", keep="last")
         # insurance_sum = insurance_sum.drop_duplicates(subset="MainCode", keep="last")
 
         # ==========================
